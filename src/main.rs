@@ -3,7 +3,8 @@ use std::cmp::Ordering;
 use rand::Rng;
 use colored::*;
 
-fn main() {
+
+fn _guessing_number () {
     println!("Guess the number!");
 
     let secret_number =  rand::thread_rng().gen_range(1, 101);
@@ -37,4 +38,37 @@ fn main() {
             }
         }
     }
+}
+
+fn _first_word (s: &String) -> usize {
+    /*
+    write a function that takes a string and returns the first word it finds in that string.
+    If the function doesn’t find a space in the string, the whole string must be one word, so the entire string should be returned
+    */
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+    s.len()
+}
+
+fn first_world_with_slice (s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            // == [0..i]
+            return &s[..i];
+        }
+    }
+    // == [0..s.len()]
+    &s[..]
+}
+
+fn main() {
+    let my_string = "okok fo";
+    let word = first_world_with_slice(&my_string);
+    println!("Ok {}", word);
+
 }
