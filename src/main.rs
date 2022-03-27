@@ -1,3 +1,5 @@
+mod threads;
+
 fn main() {
-    println!("Hello World!")
+    threads::try_threads();
 }
