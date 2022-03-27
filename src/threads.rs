@@ -1,3 +1,4 @@
+use std::time::Duration;
 use std::{thread, time};
 use std::sync::mpsc;
 use std::sync::{Arc, Mutex};
@@ -49,12 +50,14 @@ fn shared_states () {
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
 
-
-    for _ in 0..10 {
+    for index in 0..10 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move ||{
+            thread::sleep(Duration::from_secs(1));
+            println!("Index {}", index);
             let mut num = counter.lock().unwrap();
             *num += 1;
+            println!("end {}", index);
         });
         handles.push(handle);
     }
@@ -65,6 +68,6 @@ fn shared_states () {
     println!("Counter {:?}", counter);
 }
 
-pub fn try_threads () {
+pub fn main () {
     shared_states()
 }

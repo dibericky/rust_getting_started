@@ -1,5 +1,5 @@
-mod threads;
+mod thread_playground;
 
 fn main() {
-    threads::try_threads();
+    thread_playground::main();
 }
